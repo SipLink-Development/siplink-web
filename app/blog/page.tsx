@@ -10,7 +10,8 @@ import { Marquee } from "@/components/ui/marquee";
 import { blogCategories, getPosts } from "@/lib/blog";
 import { seoFor } from "@/lib/seo";
 
-export const revalidate = 600;
+// Fallback only: a Sanity webhook refreshes these on publish (app/api/revalidate).
+export const revalidate = 3600;
 
 export const metadata: Metadata = seoFor("/blog");
 

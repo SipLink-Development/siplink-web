@@ -1,9 +1,14 @@
 import type { PortableTextBlock } from "@portabletext/react";
 
-const API = "https://zguqjm6f.apicdn.sanity.io/v2025-02-19/data/query/production";
+// The live API, not apicdn: a refetch right after a publish webhook could
+// otherwise read the CDN's copy from before the change and cache it again.
+const API = "https://zguqjm6f.api.sanity.io/v2025-02-19/data/query/production";
 
-/** How long a published change can take to reach the site, in seconds. */
-const REFRESH_SECONDS = 600;
+/** Cache tag on every Sanity fetch; app/api/revalidate clears it when a post changes. */
+export const BLOG_TAG = "blog";
+
+/** Fallback refresh, in seconds, in case a webhook is ever missed. */
+const REFRESH_SECONDS = 3600;
 
 export type BlogImage = { url: string; alt: string; width: number; height: number };
 
@@ -100,7 +105,7 @@ async function query<T>(groq: string, params: Record<string, string> = {}): Prom
   for (const [key, value] of Object.entries(params)) {
     url.searchParams.set(`$${key}`, JSON.stringify(value));
   }
-  const response = await fetch(url, { next: { revalidate: REFRESH_SECONDS } });
+  const response = await fetch(url, { next: { revalidate: REFRESH_SECONDS, tags: [BLOG_TAG] } });
   // Throwing keeps the last good page live instead of replacing it with an empty one.
   if (!response.ok) throw new Error(`Sanity query failed: ${response.status}`);
   return (await response.json()).result;

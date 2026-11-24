@@ -21,7 +21,8 @@ import { openGraphDefaults } from "@/lib/seo";
 import { site } from "@/lib/site";
 import { JsonLd } from "@/components/site/json-ld";
 
-export const revalidate = 600;
+// Fallback only: a Sanity webhook refreshes these on publish (app/api/revalidate).
+export const revalidate = 3600;
 
 export async function generateStaticParams() {
   const posts = await getPosts();
