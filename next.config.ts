@@ -59,6 +59,9 @@ const nextConfig: NextConfig = {
       ["/blog/business-voip-service-providers-in-india.php", "/blog/voip-service-providers-in-chennai-india-voip-service-questions-and-answers"],
       ["/blog/5g-internet-technology-voip-service-providers-in-india.php", "/blog/the-feature-and-future-of-5g-internet-technology-in-call-center-services"],
       ["/blog/voip-service-providers-in-india.php", "/blog/the-complete-guide-to-voip-service-providers-in-chennai-india"],
+      // The old /location WordPress city posts now live in the blog under the same slugs.
+      ["/location", "/blog"],
+      ["/location/:slug", "/blog/:slug"],
     ].map(([source, destination]) => ({ source, destination, permanent: true }));
   },
 };
