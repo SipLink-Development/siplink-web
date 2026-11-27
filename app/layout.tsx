@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Caveat, Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import { ChatLauncher } from "@/components/site/chat-launcher";
 
 import { JsonLd } from "@/components/site/json-ld";
@@ -109,6 +110,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteFooter />
         {/* tawk.to chat. Loaded last so it never holds up the page. */}
         <ChatLauncher />
+        {/* Google Analytics 4: property "Siplink - GA4", stream https://www.siplink.in. */}
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-RMWD145ZCP" strategy="afterInteractive" />
+        <Script id="ga4" strategy="afterInteractive">
+          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-RMWD145ZCP");`}
+        </Script>
       </body>
     </html>
   );
