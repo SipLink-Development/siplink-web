@@ -36,6 +36,8 @@ export const metadata: Metadata = {
   // No canonical here: a layout canonical would apply "/" to every page.
   // Pages set their own through `seoFor`.
   openGraph: openGraphDefaults,
+  // Same token the old siplink.in pages carried, so SipLink's existing Search Console property stays verified.
+  verification: { google: "GtkDCpXzlajA4-VqCWZCHLRT0g3lQVIpal58C8O2JgQ" },
 };
 
 /** Chennai head office for search engines' local results. */
